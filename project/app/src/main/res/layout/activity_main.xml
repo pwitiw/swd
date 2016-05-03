@@ -16,148 +16,50 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/textViewStreet1"
-        android:id="@+id/textViewStreet1"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#000000" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="podaj ulicę"
-        android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/textViewStreet1"
-        android:layout_toRightOf="@+id/textViewStreet1"
+        android:text="@string/btnAdd"
+        android:id="@+id/btnAdd"
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:paddingLeft="30dp" />
+        android:layout_alignParentEnd="true"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/textViewCity1"
-        android:id="@+id/textViewCity1"
-        android:layout_below="@+id/textViewStreet1"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textColor="#000000" />
+        android:id="@+id/scrollView"
+        android:layout_below="@+id/btnAdd"
+        android:layout_above="@+id/btnSearchKm">
 
-    <TextView
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            tools:context=".MainActivity"
+            android:id="@+id/linearlayout">
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="podaj miasto"
-        android:id="@+id/textView3"
-        android:paddingLeft="15dp"
-        android:layout_below="@+id/textView2"
-        android:layout_toRightOf="@+id/textViewCity1"
-        android:layout_toEndOf="@+id/textViewCity1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/textViewStreet1"
-        android:id="@+id/textView4"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/textViewCity1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#000000" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="podaj ulicę"
-        android:id="@+id/textView5"
-        android:paddingLeft="30dp"
-        android:layout_alignRight="@+id/textView9"
-        android:layout_alignEnd="@+id/textView9"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/textViewCity1"
-        android:id="@+id/textView6"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentLeft="true"
-        android:textColor="#000000" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="podaj miasto"
-        android:id="@+id/textView7"
-        android:paddingLeft="15dp"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBottom="@+id/textView6"
-        android:layout_toRightOf="@+id/textView6"
-        android:layout_toEndOf="@+id/textView6" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/textViewStreet1"
-        android:id="@+id/textView8"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textColor="#000000" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="podaj ulicę"
-        android:id="@+id/textView9"
-        android:paddingLeft="30dp"
-        android:layout_alignTop="@+id/textView8"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_alignRight="@+id/textView7"
-        android:layout_alignEnd="@+id/textView7" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/textViewCity1"
-        android:id="@+id/textView10"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView9"
-        android:layout_alignParentLeft="true"
-        android:textColor="#000000" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="podaj miasto"
-        android:id="@+id/textView11"
-        android:paddingLeft="15dp"
-        android:layout_below="@+id/textView9"
-        android:layout_toRightOf="@+id/textView10"
-        android:layout_alignRight="@+id/textView9"
-        android:layout_alignEnd="@+id/textView9" />
+        android:text="@string/btnGetAdress"
+        android:id="@+id/btnGetAdress"
+        android:layout_alignBottom="@+id/button"
+        android:layout_alignRight="@+id/scrollView"
+        android:layout_alignEnd="@+id/scrollView"
+        android:layout_alignTop="@+id/buttonSearchTime" />
 
     <Button
         android:layout_width="wrap_content"
@@ -165,8 +67,6 @@
         android:text="@string/btnSearchTime"
         android:id="@+id/buttonSearchTime"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button2"
-        android:layout_alignEnd="@+id/btnSearchKm"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -175,9 +75,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btnSearchTime"
         android:id="@+id/button"
-        android:layout_below="@+id/buttonSearchTime"
-        android:layout_toRightOf="@+id/textView8"
-        android:layout_toEndOf="@+id/textView8" />
+        android:layout_below="@+id/buttonSearchTime"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -188,13 +86,4 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="dodaj ades"
-        android:id="@+id/btnSearchAdd"
-        android:layout_below="@+id/textView10"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="26dp" />
 </RelativeLayout>

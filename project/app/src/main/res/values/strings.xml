@@ -2,12 +2,8 @@
     <string name="action_settings">Settings</string>
     <string name="app_name">Wyszukiwanie trasy</string>
     <string name="title">Wpisz poniżej adresy.</string>
-    <string name="textViewStreet1">Ulica:</string>
-    <string name="textViewCity1">Miasto:</string>
-    <string name="textViewStreet2">Ulica:</string>
-    <string name="textViewCity2">Miasto:</string>
-    <string name="textViewStreet3">Ulica:</string>
-    <string name="textViewCity3">Miasto:</string>
+    <string name="btnAdd">Dodaj</string>
+    <string name="btnGetAdress">Czytaj</string>
     <string name="btnSearchKm">Szukaj najkrótszej trasy</string>
     <string name="btnSearchTime">Szuka najszybszej trasy</string>
     <string name="btnSearchAdd">Dodaj adres</string>
