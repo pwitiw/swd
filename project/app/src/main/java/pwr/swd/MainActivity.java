@@ -2,13 +2,10 @@ package pwr.swd;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-
+import pwr.swd.model.MapQuestResponse;
 import pwr.swd.utils.Consts;
 import pwr.swd.utils.HttpHelper;
 import retrofit.Callback;
@@ -32,18 +29,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void performAction() throws JSONException{
+    void performAction() throws JSONException {
         http = HttpHelper.getInstance();
-        http.mapQuestAPI.post(new JSONObject(Consts.DANE),new Callback<Response>() {
-
+        http.mapQuestAPI.post(Consts.DANE, new Callback<MapQuestResponse>() {
             @Override
-            public void success(Response response, Response response2) {
-                System.out.println("SUCCESS");
+            public void success(MapQuestResponse mapQuestResponse, Response response) {
+                System.out.println(mapQuestResponse.toString());
             }
 
             @Override
             public void failure(RetrofitError error) {
-                System.out.println("FAIL");
+
             }
         });
     }
