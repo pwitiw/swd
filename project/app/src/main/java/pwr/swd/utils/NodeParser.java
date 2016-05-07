@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pwr.swd.Node;
-import pwr.swd.Parameters;
+import pwr.swd.Neighbor;
 import pwr.swd.mapQuestModel.MapQuestLocation;
 import pwr.swd.mapQuestModel.MapQuestResponse;
 
@@ -21,19 +21,19 @@ public class NodeParser {
             Float[] currDistances = response.getDistance()[i];
             Float[] currTimes = response.getTime()[i];
 
-            List<Parameters> parameters = parseParameter(response.getLocations(), currDistances, currTimes);
+            List<Neighbor> parameters = parseParameter(response.getLocations(), currDistances, currTimes);
             nodes.add(new Node(response.getLocations()[i].toString(), parameters));
         }
         
         return nodes;
     }
 
-    private static List<Parameters> parseParameter(MapQuestLocation[] locations, Float[] distances, Float[] times) {
+    private static List<Neighbor> parseParameter(MapQuestLocation[] locations, Float[] distances, Float[] times) {
 
-        List<Parameters> parameters = new ArrayList();
+        List<Neighbor> parameters = new ArrayList();
         for (int i = 0; i < locations.length; i++) {
             if (distances[i] != 0)
-                parameters.add(new Parameters(locations[i].toString(), distances[i], times[i]));
+                parameters.add(new Neighbor(locations[i].toString(), distances[i], times[i]));
         }
         return parameters;
     }

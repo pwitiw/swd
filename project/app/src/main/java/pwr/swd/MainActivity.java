@@ -2,12 +2,22 @@ package pwr.swd;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import pwr.swd.mapQuestModel.MapQuestRequest;
 import pwr.swd.services.RestService;
 import pwr.swd.services.RouteService;
-import pwr.swd.utils.Consts;
 
 public class MainActivity extends AppCompatActivity {
+
+    private MyRecyclerAdapter adapter;
+    private List<Record> dataSet = new ArrayList<>();
 
 
     private RouteService routeService;
@@ -18,10 +28,43 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setUpButtons();
+        setUpRecyclerView();
+
+
         routeService = new RouteService();
         restService = new RestService();
 
-        restService.getDataForLocalizations(Consts.LOCALES);
     }
 
+    private void setUpButtons() {
+        Button bt = (Button) findViewById(R.id.add_new);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                adapter.addNewItem(new Record());
+            }
+        });
+
+        Button bt2 = (Button) findViewById(R.id.find_fastest);
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MapQuestRequest request = MapQuestRequest.parseMapQuestRequest(dataSet);
+                restService.getDataForLocalizations(request);
+            }
+        });
+
+    }
+
+    private void setUpRecyclerView() {
+
+        adapter = new MyRecyclerAdapter();
+        adapter.setDataSet(this.dataSet);
+
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+    }
 }
