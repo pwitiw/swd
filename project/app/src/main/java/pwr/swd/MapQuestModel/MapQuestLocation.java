@@ -1,17 +1,13 @@
-package pwr.swd.model;
+package pwr.swd.mapQuestModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import pwr.swd.model.GeocodeQuality;
-import pwr.swd.model.LatLng;
 
 /**
  * Created by Patryk on 04.05.2016.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Location {
+public class MapQuestLocation {
 
-    protected LatLng latLng;
     protected String street;
     protected String adminArea6;
     protected String adminArea6Type;
@@ -26,22 +22,13 @@ public class Location {
     protected String postalCode;
     protected String type;
     protected Boolean dragPoint;
-    protected LatLng displayLatLng;
-    protected GeocodeQuality geocodeQuality;
     protected String geocodeQualityCode;
     protected Long linkId;
     protected String sideOfStreet;
 
-    public Location() {
+    public MapQuestLocation() {
     }
 
-    public LatLng getLatLng() {
-        return latLng;
-    }
-
-    public void setLatLng(LatLng latLng) {
-        this.latLng = latLng;
-    }
 
     public String getStreet() {
         return street;
@@ -155,22 +142,6 @@ public class Location {
         this.dragPoint = dragPoint;
     }
 
-    public LatLng getDisplayLatLng() {
-        return displayLatLng;
-    }
-
-    public void setDisplayLatLng(LatLng displayLatLng) {
-        this.displayLatLng = displayLatLng;
-    }
-
-    public GeocodeQuality getGeocodeQuality() {
-        return geocodeQuality;
-    }
-
-    public void setGeocodeQuality(GeocodeQuality geocodeQuality) {
-        this.geocodeQuality = geocodeQuality;
-    }
-
     public String getGeocodeQualityCode() {
         return geocodeQualityCode;
     }
@@ -193,5 +164,10 @@ public class Location {
 
     public void setSideOfStreet(String sideOfStreet) {
         this.sideOfStreet = sideOfStreet;
+    }
+
+    @Override
+    public String toString() {
+        return  street + ", " + adminArea5 + ", " + adminArea1;
     }
 }

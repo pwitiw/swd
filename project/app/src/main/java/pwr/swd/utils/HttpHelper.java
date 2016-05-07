@@ -14,6 +14,7 @@ public class HttpHelper {
     private HttpHelper() {
         restAdapter = new RestAdapter.Builder()
                 .setEndpoint(Consts.BASE_URL)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
 
         mapQuestAPI = restAdapter.create(MapQuestAPI.class);
