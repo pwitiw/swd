@@ -1,10 +1,10 @@
 <resources>
     <string name="action_settings">Settings</string>
     <string name="app_name">Wyszukiwanie trasy</string>
-    <string name="title">Wpisz poniżej adresy.</string>
-    <string name="btnAdd">Dodaj</string>
-    <string name="btnGetAdress">Czytaj</string>
-    <string name="btnSearchKm">Szukaj najkrótszej trasy</string>
-    <string name="btnSearchTime">Szuka najszybszej trasy</string>
-    <string name="btnSearchAdd">Dodaj adres</string>
+    <string name="ulica_miasto">Ulica, miasto</string>
+    <string name="godzina">Godzina</string>
+    <string name="dodaj">Dodaj</string>
+    <string name="wyszukaj_najkr_tsza_tras">Wyszukaj najkrótsza trasę</string>
+    <string name="wyszukaj_najszybsza_tras">wyszukaj najszybsza trasę</string>
+
 </resources>

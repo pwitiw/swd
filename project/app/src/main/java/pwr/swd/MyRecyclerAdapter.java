@@ -1,7 +1,5 @@
-package marta.tryre;
+package pwr.swd;
 
-import android.support.v7.widget.ListViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -11,15 +9,12 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-import static android.support.v7.widget.RecyclerView.*;
+import static android.support.v7.widget.RecyclerView.Adapter;
+import static android.support.v7.widget.RecyclerView.ViewHolder;
 
 public class MyRecyclerAdapter extends Adapter {
 
     public ArrayList<Record> dataSet;
-
-    public MyRecyclerAdapter () {
-        this.dataSet = new ArrayList<>();
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,6 +37,10 @@ public class MyRecyclerAdapter extends Adapter {
     public void addNewItem(Record item) {
         dataSet.add(item);
         notifyDataSetChanged();
+    }
+
+    public void setDataSet(ArrayList<Record> dataSet) {
+        this.dataSet = dataSet;
     }
 
     class MyViewHolder extends ViewHolder {
@@ -76,6 +75,26 @@ public class MyRecyclerAdapter extends Adapter {
                         return;
                     if(position <= dataSet.size()) {
                         dataSet.get(position).address = s.toString();
+                    }
+                }
+            });
+            time.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    if(dontChangeThisShit)
+                        return;
+                    if(position <= dataSet.size()) {
+                        dataSet.get(position).time = s.toString();
                     }
                 }
             });
