@@ -22,15 +22,16 @@ public class RestService {
         http = HttpHelper.getInstance();
     }
 
-    public void getDataForLocalizations(MapQuestRequest mapQuestRequest) {
+    public void getDataForLocalizations(final MapQuestRequest mapQuestRequest) {
 
         http = HttpHelper.getInstance();
         MapQuestRequest request = mapQuestRequest;
         http.mapQuestAPI.post(request, new Callback<MapQuestResponse>() {
             @Override
             public void success(MapQuestResponse mapQuestResponse, Response response) {
-                List<Node> nodes = NodeParser.getNodesForResponse(mapQuestResponse);
-
+                List<Node> nodes;
+                if (!mapQuestResponse.isEmpty())
+                     nodes = NodeParser.getNodesForResponse(mapQuestResponse);
             }
 
             @Override
