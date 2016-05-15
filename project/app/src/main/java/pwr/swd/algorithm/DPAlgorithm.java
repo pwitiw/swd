@@ -18,35 +18,46 @@ public class DPAlgorithm {
     }
 
     public List<Vertex> getOptimalPath() {
-        SystemState systemState = new SystemState(startingPoint, locationsToVisit);
+        List<SystemState> list = new ArrayList<SystemState>();
+        list.add(new SystemState(startingPoint, locationsToVisit));
 
+        List<SystemState> bestPaths = findBest(list);
+        List<Vertex> bestSolution = null;
 
-        return systemState.getVisitedLocations();
+        return bestSolution;
     }
 
-    private List<SystemState> findBest(List<SystemState> previousStates) {
+    public List<SystemState> findBest(List<SystemState> previousStates) {
         List<SystemState> bestOptions = new ArrayList<SystemState>();
 
-        for(SystemState state : previousStates) {
+        for (SystemState state : previousStates) {
             List<Vertex> possiblePaths = state.getLocationsLeft();
 
-            for(Vertex vertex : possiblePaths) {
+            for (Vertex vertex : possiblePaths) {
                 SystemState candidateState = state.generateNewState(vertex);
-
-                if(badOption(bestOptions, candidateState)) {
-                    bestOptions.add(candidateState);
-                }
+                selectOptimalRoutes(bestOptions, candidateState);
             }
         }
 
         return bestOptions;
     }
 
-    private boolean badOption(List<SystemState> reasonableOptions, SystemState state) {
-        if(reasonableOptions.isEmpty()) {
-            return false;
-        } else {
-            return true;
+    public List<SystemState> selectOptimalRoutes(List<SystemState> reasonableOptions, SystemState state) {
+        for (SystemState savedState : reasonableOptions) {
+            if (savedState.getCurrentVertex().equals(state.getCurrentVertex())) {
+                if(state.getTotalDistance() < savedState.getTotalDistance() && state.getTimeMagrin() > savedState.getTimeMagrin()) {
+                    reasonableOptions.remove(savedState);
+                    reasonableOptions.add(state);
+                    return reasonableOptions;
+                } else if (state.getTotalDistance() > savedState.getTotalDistance() && state.getTimeMagrin() < savedState.getTimeMagrin()){
+                    return reasonableOptions;
+                } else {
+                    reasonableOptions.add(state);
+                    return reasonableOptions;
+                }
+            }
         }
+        reasonableOptions.add(state);
+        return reasonableOptions;
     }
 }

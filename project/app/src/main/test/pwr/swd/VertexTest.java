@@ -40,7 +40,7 @@ public class VertexTest {
         v[1].addDestination(v[2], 2L);
         v[2].addDestination(v[0], 3L);
 
-        assertEquals(v[0].getDistanceTo(v[1]), new Long(1));
-        assertEquals(v[2].getDistanceTo(v[0]), new Long(3));
+        assertEquals(new Long(1), v[0].getDistanceTo(v[1]));
+        assertEquals(new Long(3), v[2].getDistanceTo(v[0]));
     }
 }
