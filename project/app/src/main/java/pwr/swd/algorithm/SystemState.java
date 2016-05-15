@@ -2,15 +2,36 @@ package pwr.swd.algorithm;
 
 import pwr.swd.algorithm.graph.Vertex;
 
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Michal Gzyl
  */
 public class SystemState {
-    private Long totalDistance;
-    private Long timeMagrin;
-    private Set<Vertex> visitedLocations;
+    private Long totalDistance = 0L;
+    private Long timeMagrin = Long.MAX_VALUE;
+    private Vertex currentVertex;
+    private LinkedList<Vertex> visitedLocations = new LinkedList<Vertex>();
+    private List<Vertex> locationsLeft;
+
+    public SystemState(Vertex currentVertex, List<Vertex> locationsLeft) {
+        this.currentVertex = currentVertex;
+        this.locationsLeft = locationsLeft;
+        visitedLocations.addFirst(currentVertex);
+    }
+
+    public SystemState(SystemState state) {
+        this.visitedLocations = state.visitedLocations;
+        this.locationsLeft = state.locationsLeft;
+    }
+
+    public List<Vertex> getLocationsLeft() {
+        return locationsLeft;
+    }
+
+    public Vertex getCurrentVertex() {
+        return currentVertex;
+    }
 
     public Long getTotalDistance() {
         return totalDistance;
@@ -20,13 +41,23 @@ public class SystemState {
         return timeMagrin;
     }
 
-    public Set<Vertex> getVisitedLocations() {
+    public List<Vertex> getVisitedLocations() {
         return visitedLocations;
     }
 
-    public SystemState updateState(Vertex addedVertex) {
-        visitedLocations.add(addedVertex);
+    public boolean isFinished() {
+        return locationsLeft.isEmpty();
+    }
 
-        return this;
+    public SystemState generateNewState(Vertex addedVertex) {
+        SystemState state = new SystemState(this);
+        Long travelDistance = currentVertex.getDistanceTo(addedVertex);
+
+        state.totalDistance = this.totalDistance + travelDistance;
+        state.timeMagrin = Math.min(timeMagrin-travelDistance, addedVertex.getTimeConstrain());
+        state.currentVertex = addedVertex;
+        state.visitedLocations.addFirst(addedVertex);
+        state.locationsLeft.remove(addedVertex);
+        return state;
     }
 }
