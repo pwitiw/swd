@@ -2,8 +2,7 @@ package pwr.swd.algorithm;
 
 import pwr.swd.algorithm.graph.Vertex;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by mi on 2016-05-15.
@@ -18,46 +17,63 @@ public class DPAlgorithm {
     }
 
     public List<Vertex> getOptimalPath() {
-        List<SystemState> list = new ArrayList<SystemState>();
-        list.add(new SystemState(startingPoint, locationsToVisit));
-
-        List<SystemState> bestPaths = findBest(list);
-        List<Vertex> bestSolution = null;
-
-        return bestSolution;
+        SystemState initialState = new SystemState(startingPoint, locationsToVisit);
+        return findOptimalPath(initialState).getVisitedLocations();
     }
 
-    public List<SystemState> findBest(List<SystemState> previousStates) {
-        List<SystemState> bestOptions = new ArrayList<SystemState>();
+    public SystemState findOptimalPath(SystemState initialState) {
+        List<SystemState> initialStateAsList = new ArrayList<SystemState>();
+        initialStateAsList.add(initialState);
+        return getShortestPathWithinTimeLimit(findBestPaths(initialStateAsList));
+    }
 
-        for (SystemState state : previousStates) {
-            List<Vertex> possiblePaths = state.getLocationsLeft();
+    public List<SystemState> findBestPaths(List<SystemState> calculatedStates) {
+        if (calculatedStates.get(0).getLocationsLeft().isEmpty()) {
+            return calculatedStates;
+        } else {
+            List<SystemState> bestOptions = new ArrayList<SystemState>();
 
-            for (Vertex vertex : possiblePaths) {
-                SystemState candidateState = state.generateNewState(vertex);
-                selectOptimalRoutes(bestOptions, candidateState);
+            for (SystemState state : calculatedStates) {
+                List<Vertex> possiblePaths = new ArrayList<Vertex>(state.getLocationsLeft());
+
+                for (Vertex vertex : possiblePaths) {
+                    SystemState candidateState = state.generateNewState(vertex);
+                    filterBestOptions(bestOptions, candidateState);
+                }
+            }
+            return findBestPaths(bestOptions);
+        }
+    }
+
+    public SystemState getShortestPathWithinTimeLimit(List<SystemState> finalPaths) {
+        SystemState shortestAllowed = null;
+        for (int i=0; i<finalPaths.size(); i++) {
+            SystemState path = finalPaths.get(i).generateNewState(startingPoint);
+
+            if (path.getTimeMagrin() >= 0 && (shortestAllowed == null || path.getTotalDistance() < shortestAllowed.getTotalDistance())) {
+                shortestAllowed = path;
             }
         }
-
-        return bestOptions;
+        return shortestAllowed;
     }
 
-    public List<SystemState> selectOptimalRoutes(List<SystemState> reasonableOptions, SystemState state) {
+    public void filterBestOptions(List<SystemState> reasonableOptions, SystemState state) {
         for (SystemState savedState : reasonableOptions) {
             if (savedState.getCurrentVertex().equals(state.getCurrentVertex())) {
-                if(state.getTotalDistance() < savedState.getTotalDistance() && state.getTimeMagrin() > savedState.getTimeMagrin()) {
+                if (state.betterThan(savedState)) {
                     reasonableOptions.remove(savedState);
                     reasonableOptions.add(state);
-                    return reasonableOptions;
-                } else if (state.getTotalDistance() > savedState.getTotalDistance() && state.getTimeMagrin() < savedState.getTimeMagrin()){
-                    return reasonableOptions;
+                    return;
+                }
+                if (savedState.betterThan(state)) {
+                    return;
                 } else {
                     reasonableOptions.add(state);
-                    return reasonableOptions;
+                    return;
                 }
             }
         }
+        //case where destination was unreachable before
         reasonableOptions.add(state);
-        return reasonableOptions;
     }
 }

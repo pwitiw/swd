@@ -25,6 +25,14 @@ public class SystemState {
         this.locationsLeft = state.locationsLeft;
     }
 
+    public SystemState(Long totalDistance, Long timeMagrin, Vertex currentVertex, LinkedList<Vertex> visitedLocations, List<Vertex> locationsLeft) {
+        this.totalDistance = totalDistance;
+        this.timeMagrin = timeMagrin;
+        this.currentVertex = currentVertex;
+        this.visitedLocations = visitedLocations;
+        this.locationsLeft = locationsLeft;
+    }
+
     public List<Vertex> getLocationsLeft() {
         return locationsLeft;
     }
@@ -59,5 +67,9 @@ public class SystemState {
         state.visitedLocations.addFirst(addedVertex);
         state.locationsLeft.remove(addedVertex);
         return state;
+    }
+
+    public boolean betterThan(SystemState other) {
+        return this.getTotalDistance() < other.getTotalDistance() && this.getTimeMagrin() > other.getTimeMagrin();
     }
 }
