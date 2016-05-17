@@ -13,8 +13,14 @@ public class Vertex {
     private GraphNode graphNode;
     private Map<Vertex, Long> distanceMap = new HashMap<Vertex, Long>();
 
+    public Vertex() {}
+
     public Vertex(GraphNode graphNode) {
         this.graphNode = graphNode;
+    }
+
+    public void setGraphNode(GraphNode node) {
+        this.graphNode = node;
     }
 
     public void addDestination(Vertex key, Long distance) {

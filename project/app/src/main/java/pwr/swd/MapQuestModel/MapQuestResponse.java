@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class MapQuestResponse {
 
     private Float[][] distance;
-    private Float[][] time;
+    private Long[][] time;
     private MapQuestLocation[] locations;
 
     public Float[][] getDistance() {
@@ -20,11 +20,11 @@ public class MapQuestResponse {
         this.distance = distance;
     }
 
-    public Float[][] getTime() {
+    public Long[][] getTime() {
         return time;
     }
 
-    public void setTime(Float[][] time) {
+    public void setTime(Long[][] time) {
         this.time = time;
     }
 

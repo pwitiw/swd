@@ -47,8 +47,7 @@ public class DPAlgorithmTest {
 
     @Test
     public void newDestinataionsShouldAdd() {
-        DPAlgorithm dpa = new DPAlgorithm();
-        dpa.initialize(v[0], vertexList);
+        DPAlgorithm dpa = new DPAlgorithm(v[0], vertexList);
 
         SystemState s1 = new SystemState(v[0], vertexList);
         SystemState s2 = s1.generateNewState(v[1]);
@@ -67,8 +66,7 @@ public class DPAlgorithmTest {
 
     @Test
     public void meetOneCriteriaShouldAdd() {
-        DPAlgorithm dpa = new DPAlgorithm();
-        dpa.initialize(v[0], vertexList);
+        DPAlgorithm dpa = new DPAlgorithm(v[0], vertexList);
 
         SystemState s1 = new SystemState(v[0], vertexList);
         SystemState s2 = s1.generateNewState(v[1]);
@@ -89,8 +87,7 @@ public class DPAlgorithmTest {
 
     @Test
     public void meetNoCriteriaShouldNotAdd() {
-        DPAlgorithm dpa = new DPAlgorithm();
-        dpa.initialize(v[0], vertexList);
+        DPAlgorithm dpa = new DPAlgorithm(v[0], vertexList);
 
         SystemState s1 = new SystemState(v[0], vertexList);
         SystemState s2 = s1.generateNewState(v[1]);
@@ -111,8 +108,7 @@ public class DPAlgorithmTest {
 
     @Test
     public void e2ePositiveCaseTest() {
-        DPAlgorithm dpa = new DPAlgorithm();
-        dpa.initialize(v[0], vertexList);
+        DPAlgorithm dpa = new DPAlgorithm(v[0], vertexList);
 
         v[0].addDestination(v[1], 10L);
         v[0].addDestination(v[2], 5L);
@@ -139,8 +135,7 @@ public class DPAlgorithmTest {
 
     @Test
     public void e2eNoPathCaseTest() {
-        DPAlgorithm dpa = new DPAlgorithm();
-        dpa.initialize(v[0], vertexList);
+        DPAlgorithm dpa = new DPAlgorithm(v[0], vertexList);
 
         v[0].addDestination(v[1], 1000L);
         v[0].addDestination(v[2], 500L);

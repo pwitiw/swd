@@ -1,8 +1,11 @@
 package pwr.swd.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pwr.swd.Node;
+import pwr.swd.algorithm.graph.GraphNode;
+import pwr.swd.algorithm.graph.Vertex;
 import pwr.swd.mapQuestModel.MapQuestRequest;
 import pwr.swd.mapQuestModel.MapQuestResponse;
 import pwr.swd.utils.HttpHelper;
@@ -17,6 +20,7 @@ import retrofit.client.Response;
 public class RestService {
 
     private HttpHelper http;
+    private List<Vertex> nodes;
 
     public RestService() {
         http = HttpHelper.getInstance();
@@ -29,15 +33,39 @@ public class RestService {
         http.mapQuestAPI.post(request, new Callback<MapQuestResponse>() {
             @Override
             public void success(MapQuestResponse mapQuestResponse, Response response) {
-                List<Node> nodes;
-                if (!mapQuestResponse.isEmpty())
-                     nodes = NodeParser.getNodesForResponse(mapQuestResponse);
+                nodes = createVertexes(response);
+                createDistanceMatrix(response, nodes);
             }
 
             @Override
             public void failure(RetrofitError error) {
             }
         });
+    }
+
+    public List<Vertex> getLocationsGraph() {
+        return nodes;
+    }
+
+    private List<Vertex> createVertexes(Response response) {
+        pwr.swd.mapQuestModel.MapQuestLocation[] locations = response.getLocations();
+        List<Vertex> list = new ArrayList<Vertex>();
+
+        for(MapQuestLocation loc : locations) {
+            //todo przekazac ograniczenie czasowe jako Long (liczba sekund od teraz do limitu czaspwego) zamiast tego "0"
+            list.add(new Vertex(new GraphNode(loc.toString(), 0)));
+        }
+        return list;
+    }
+
+    private void createDistanceMatrix(Response response, List<Vertex> list) {
+        for(int i=0; i<list.size(); i++) {
+            Long[] currTimes = response.getTime()[i];
+
+            for(int j=0; j<currTimes.length; j++) {
+                list.get(i).addDestination(list.get(j), currTimes[j]);
+            }
+        }
     }
 
 }

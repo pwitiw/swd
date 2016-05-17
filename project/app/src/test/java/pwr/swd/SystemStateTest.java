@@ -1,3 +1,5 @@
+package pwr.swd;
+
 import pwr.swd.algorithm.graph.GraphNode;
 import pwr.swd.algorithm.SystemState;
 import pwr.swd.algorithm.graph.Vertex;

@@ -1,3 +1,5 @@
+package pwr.swd;
+
 import pwr.swd.algorithm.graph.GraphNode;
 import org.junit.Test;
 

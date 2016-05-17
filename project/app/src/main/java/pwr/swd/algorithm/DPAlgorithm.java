@@ -8,12 +8,32 @@ import java.util.*;
  * Created by mi on 2016-05-15.
  */
 public class DPAlgorithm {
-    private Vertex startingPoint;
-    private List<Vertex> locationsToVisit;
+    private final Vertex startingPoint;
+    private final List<Vertex> locationsToVisit;
 
-    public void initialize(Vertex startingPoint, List<Vertex> locationsToVisit) {
+    public DPAlgorithm(List<Vertex> locationsToVisit) {
+        this.startingPoint = locationsToVisit.get(0);
         this.locationsToVisit = locationsToVisit;
+    }
+
+    public DPAlgorithm(Vertex startingPoint, List<Vertex> locationsToVisit) {
         this.startingPoint = startingPoint;
+        this.locationsToVisit = locationsToVisit;
+    }
+
+    public String printOptimalPath() {
+        SystemState result = findOptimalPath(new SystemState(startingPoint, locationsToVisit));
+        String path = new String();
+        if(result != null) {
+            path += "Optymalna sciezka:";
+            for (Vertex v : result.getVisitedLocations()) {
+                path += String.format("\n> %s", v);
+            }
+            path += String.format("Dlugosc sciezki: %s", result.getTotalDistance());
+        } else {
+            path = "Nie znaleziono sciezki, ktora miesci sie w limicie czasowym";
+        }
+        return path;
     }
 
     public SystemState getOptimalPath() {

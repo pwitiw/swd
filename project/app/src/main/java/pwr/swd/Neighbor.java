@@ -6,10 +6,10 @@ package pwr.swd;
 public class Neighbor {
 
     private String location;
-    private Float time;
+    private Long time;
     private float distance;
 
-    public Neighbor(String location, float time, float distance) {
+    public Neighbor(String location, long time, float distance) {
         this.location = location;
         this.time = time;
         this.distance = distance;
