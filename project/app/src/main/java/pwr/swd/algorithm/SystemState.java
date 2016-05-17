@@ -9,28 +9,21 @@ import java.util.*;
  */
 public class SystemState {
     private Long totalDistance = 0L;
-    private Long timeMagrin = Long.MAX_VALUE;
+    private Long timeMargin = Long.MAX_VALUE;
     private Vertex currentVertex;
-    private LinkedList<Vertex> visitedLocations = new LinkedList<Vertex>();
+    private LinkedList<Vertex> visitedLocations;
     private List<Vertex> locationsLeft;
 
     public SystemState(Vertex currentVertex, List<Vertex> locationsLeft) {
         this.currentVertex = currentVertex;
         this.locationsLeft = locationsLeft;
+        visitedLocations = new LinkedList<>();
         visitedLocations.addFirst(currentVertex);
     }
 
     public SystemState(SystemState state) {
-        this.visitedLocations = state.visitedLocations;
-        this.locationsLeft = state.locationsLeft;
-    }
-
-    public SystemState(Long totalDistance, Long timeMagrin, Vertex currentVertex, LinkedList<Vertex> visitedLocations, List<Vertex> locationsLeft) {
-        this.totalDistance = totalDistance;
-        this.timeMagrin = timeMagrin;
-        this.currentVertex = currentVertex;
-        this.visitedLocations = visitedLocations;
-        this.locationsLeft = locationsLeft;
+        this.visitedLocations = new LinkedList<>(state.visitedLocations);
+        this.locationsLeft = new ArrayList<>(state.locationsLeft);
     }
 
     public List<Vertex> getLocationsLeft() {
@@ -45,24 +38,20 @@ public class SystemState {
         return totalDistance;
     }
 
-    public Long getTimeMagrin() {
-        return timeMagrin;
+    public Long getTimeMargin() {
+        return timeMargin;
     }
 
     public List<Vertex> getVisitedLocations() {
         return visitedLocations;
     }
 
-    public boolean isFinished() {
-        return locationsLeft.isEmpty();
-    }
-
     public SystemState generateNewState(Vertex addedVertex) {
         SystemState state = new SystemState(this);
-        Long travelDistance = currentVertex.getDistanceTo(addedVertex);
+        Long travelDistance = addedVertex.getDistanceTo(currentVertex);
 
         state.totalDistance = this.totalDistance + travelDistance;
-        state.timeMagrin = Math.min(timeMagrin-travelDistance, addedVertex.getTimeConstrain());
+        state.timeMargin = Math.min(timeMargin -travelDistance, addedVertex.getTimeConstrain());
         state.currentVertex = addedVertex;
         state.visitedLocations.addFirst(addedVertex);
         state.locationsLeft.remove(addedVertex);
@@ -70,6 +59,6 @@ public class SystemState {
     }
 
     public boolean betterThan(SystemState other) {
-        return this.getTotalDistance() < other.getTotalDistance() && this.getTimeMagrin() > other.getTimeMagrin();
+        return this.getTotalDistance() < other.getTotalDistance() && this.getTimeMargin() > other.getTimeMargin();
     }
 }

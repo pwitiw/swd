@@ -1,3 +1,5 @@
+package pwr.swd;
+
 import org.junit.Before;
 import org.junit.Test;
 import pwr.swd.algorithm.DPAlgorithm;
@@ -6,12 +8,10 @@ import pwr.swd.algorithm.graph.GraphNode;
 import pwr.swd.algorithm.graph.Vertex;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by mi on 2016-05-15.
@@ -110,20 +110,6 @@ public class DPAlgorithmTest {
     }
 
     @Test
-    public void selectShortestFromBestPaths() {
-        DPAlgorithm dpa = new DPAlgorithm();
-
-        SystemState s1 = new SystemState(10L, 20L, null, null, null);
-        SystemState s2 = new SystemState(2L, -5L, null, null, null);
-        SystemState s3 = new SystemState(5L, 0L, null, null, null);
-
-        List<SystemState> list = new ArrayList<>();
-        Collections.addAll(list, s1,s2,s3);
-
-        assertEquals(s3, dpa.getShortestPathWithinTimeLimit(list));
-    }
-
-    @Test
     public void e2ePositiveCaseTest() {
         DPAlgorithm dpa = new DPAlgorithm();
         dpa.initialize(v[0], vertexList);
@@ -144,7 +130,36 @@ public class DPAlgorithmTest {
         v[2].addDestination(v[3], 3L);
         v[2].addDestination(v[0], 11L);
 
-        List<Vertex> result = dpa.getOptimalPath();
-        assertTrue(true);
+        SystemState result = dpa.getOptimalPath();
+
+        assertEquals(v[2], result.getVisitedLocations().get(1));
+        assertEquals(v[3], result.getVisitedLocations().get(2));
+        assertEquals(v[1], result.getVisitedLocations().get(3));
+    }
+
+    @Test
+    public void e2eNoPathCaseTest() {
+        DPAlgorithm dpa = new DPAlgorithm();
+        dpa.initialize(v[0], vertexList);
+
+        v[0].addDestination(v[1], 1000L);
+        v[0].addDestination(v[2], 500L);
+        v[0].addDestination(v[3], 1000L);
+
+        v[1].addDestination(v[0], 1000L);
+        v[1].addDestination(v[2], 1000L);
+        v[1].addDestination(v[3], 5000L);
+
+        v[3].addDestination(v[1], 1000L);
+        v[3].addDestination(v[0], 6000L);
+        v[3].addDestination(v[2], 3000L);
+
+        v[2].addDestination(v[1], 4000L);
+        v[2].addDestination(v[3], 3000L);
+        v[2].addDestination(v[0], 1100L);
+
+        SystemState result = dpa.getOptimalPath();
+
+        assertEquals(null, result);
     }
 }

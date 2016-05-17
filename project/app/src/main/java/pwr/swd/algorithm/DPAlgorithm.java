@@ -16,9 +16,9 @@ public class DPAlgorithm {
         this.startingPoint = startingPoint;
     }
 
-    public List<Vertex> getOptimalPath() {
+    public SystemState getOptimalPath() {
         SystemState initialState = new SystemState(startingPoint, locationsToVisit);
-        return findOptimalPath(initialState).getVisitedLocations();
+        return findOptimalPath(initialState);
     }
 
     public SystemState findOptimalPath(SystemState initialState) {
@@ -50,7 +50,7 @@ public class DPAlgorithm {
         for (int i=0; i<finalPaths.size(); i++) {
             SystemState path = finalPaths.get(i).generateNewState(startingPoint);
 
-            if (path.getTimeMagrin() >= 0 && (shortestAllowed == null || path.getTotalDistance() < shortestAllowed.getTotalDistance())) {
+            if (path.getTimeMargin() >= 0 && (shortestAllowed == null || path.getTotalDistance() < shortestAllowed.getTotalDistance())) {
                 shortestAllowed = path;
             }
         }

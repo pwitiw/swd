@@ -48,14 +48,14 @@ public class SystemStateTest {
         assertEquals(list, systemState.getLocationsLeft());
         assertEquals((Long)0L, systemState.getTotalDistance());
         assertEquals(v[0], systemState.getCurrentVertex());
-        assertEquals((Long)Long.MAX_VALUE, systemState.getTimeMagrin());
+        assertEquals((Long)Long.MAX_VALUE, systemState.getTimeMargin());
 
         SystemState newState = systemState.generateNewState(v[2]);
 
         assertEquals(Arrays.asList(v[0], v[1]), newState.getLocationsLeft());
-        assertEquals((Long)2L, newState.getTotalDistance());
+        assertEquals((Long)3L, newState.getTotalDistance());
         assertEquals(v[2], newState.getCurrentVertex());
-        assertEquals((Long)120L, newState.getTimeMagrin());
+        assertEquals((Long)120L, newState.getTimeMargin());
     }
 
     @Test
@@ -69,10 +69,10 @@ public class SystemStateTest {
 
         SystemState systemState = new SystemState(v[0], list);
 
-        systemState = systemState.generateNewState(v[2]);
         systemState = systemState.generateNewState(v[1]);
+        systemState = systemState.generateNewState(v[2]);
         systemState = systemState.generateNewState(v[0]);
 
-        assertEquals(Arrays.asList(v[0], v[1], v[2], v[0]), systemState.getVisitedLocations());
+        assertEquals(Arrays.asList(v[0], v[2], v[1], v[0]), systemState.getVisitedLocations());
     }
 }
