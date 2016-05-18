@@ -3,13 +3,12 @@ package pwr.swd.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import pwr.swd.Node;
 import pwr.swd.algorithm.graph.GraphNode;
 import pwr.swd.algorithm.graph.Vertex;
+import pwr.swd.mapQuestModel.MapQuestLocation;
 import pwr.swd.mapQuestModel.MapQuestRequest;
 import pwr.swd.mapQuestModel.MapQuestResponse;
 import pwr.swd.utils.HttpHelper;
-import pwr.swd.utils.NodeParser;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -33,8 +32,8 @@ public class RestService {
         http.mapQuestAPI.post(request, new Callback<MapQuestResponse>() {
             @Override
             public void success(MapQuestResponse mapQuestResponse, Response response) {
-                nodes = createVertexes(response);
-                createDistanceMatrix(response, nodes);
+                nodes = createVertexes(mapQuestResponse);
+                createDistanceMatrix(mapQuestResponse, nodes);
             }
 
             @Override
@@ -47,22 +46,22 @@ public class RestService {
         return nodes;
     }
 
-    private List<Vertex> createVertexes(Response response) {
-        pwr.swd.mapQuestModel.MapQuestLocation[] locations = response.getLocations();
+    private List<Vertex> createVertexes(MapQuestResponse response) {
         List<Vertex> list = new ArrayList<Vertex>();
+        MapQuestLocation[] locations = response.getLocations();
 
-        for(MapQuestLocation loc : locations) {
+        for (MapQuestLocation loc : locations) {
             //todo przekazac ograniczenie czasowe jako Long (liczba sekund od teraz do limitu czaspwego) zamiast tego "0"
-            list.add(new Vertex(new GraphNode(loc.toString(), 0)));
+            list.add(new Vertex(new GraphNode(loc.toString(), 0L)));
         }
         return list;
     }
 
-    private void createDistanceMatrix(Response response, List<Vertex> list) {
-        for(int i=0; i<list.size(); i++) {
+    private void createDistanceMatrix(MapQuestResponse response, List<Vertex> list) {
+        for (int i = 0; i < list.size(); i++) {
             Long[] currTimes = response.getTime()[i];
 
-            for(int j=0; j<currTimes.length; j++) {
+            for (int j = 0; j < currTimes.length; j++) {
                 list.get(i).addDestination(list.get(j), currTimes[j]);
             }
         }
