@@ -8,13 +8,21 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+import java.util.List;
+>>>>>>> c9b13b891813395f29ced4a5def9228624f35247
 
 import static android.support.v7.widget.RecyclerView.Adapter;
 import static android.support.v7.widget.RecyclerView.ViewHolder;
 
 public class MyRecyclerAdapter extends Adapter {
 
+<<<<<<< HEAD
     public ArrayList<Record> dataSet;
+=======
+    public List<Record> dataSet;
+>>>>>>> c9b13b891813395f29ced4a5def9228624f35247
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +47,11 @@ public class MyRecyclerAdapter extends Adapter {
         notifyDataSetChanged();
     }
 
+<<<<<<< HEAD
     public void setDataSet(ArrayList<Record> dataSet) {
+=======
+    public void setDataSet(List<Record> dataSet) {
+>>>>>>> c9b13b891813395f29ced4a5def9228624f35247
         this.dataSet = dataSet;
     }
 

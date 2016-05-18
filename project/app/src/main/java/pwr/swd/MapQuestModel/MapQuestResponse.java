@@ -35,4 +35,9 @@ public class MapQuestResponse {
     public void setLocations(MapQuestLocation[] locations) {
         this.locations = locations;
     }
+
+    public boolean isEmpty(){
+        return distance ==null? true:(locations == null ? true: (time == null ? true : false));
+    }
+
 }

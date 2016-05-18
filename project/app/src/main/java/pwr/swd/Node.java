@@ -8,12 +8,13 @@ import java.util.List;
 public class Node {
 
     private String name;
-    private List<Parameters> neighbors;
+    private String time;
+    private List<Neighbor> neighbors;
 
     public Node() {
     }
 
-    public Node(String name, List<Parameters> neighbors) {
+    public Node(String name, List<Neighbor> neighbors) {
         this.neighbors = neighbors;
         this.name = name;
     }
@@ -22,8 +23,6 @@ public class Node {
     public static Node parseNode(String name) {
 
         Node node = new Node();
-
-
         return node;
     }
 
