@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private MyRecyclerAdapter adapter;
     private ArrayList<Record> dataSet = new ArrayList<>();
 
-
-    private RouteService routeService;
-
     private RestService restService;
 
     @Override
@@ -30,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setUpButtons();
         setUpRecyclerView();
 
-
-        routeService = new RouteService();
         restService = new RestService();
 
     }
