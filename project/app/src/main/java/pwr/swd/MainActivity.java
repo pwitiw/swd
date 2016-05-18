@@ -21,7 +21,6 @@ import java.util.List;
 
 import pwr.swd.mapQuestModel.MapQuestRequest;
 import pwr.swd.services.RestService;
-import pwr.swd.services.RouteService;
 
 public class MainActivity extends AppCompatActivity {
 
