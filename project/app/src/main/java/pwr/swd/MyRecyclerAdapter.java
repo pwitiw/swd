@@ -1,28 +1,27 @@
 package pwr.swd;
-
+import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
-import java.util.List;
->>>>>>> c9b13b891813395f29ced4a5def9228624f35247
 
 import static android.support.v7.widget.RecyclerView.Adapter;
 import static android.support.v7.widget.RecyclerView.ViewHolder;
 
 public class MyRecyclerAdapter extends Adapter {
 
-<<<<<<< HEAD
+    private final FragmentActivity fragmentActivity;
     public ArrayList<Record> dataSet;
-=======
-    public List<Record> dataSet;
->>>>>>> c9b13b891813395f29ced4a5def9228624f35247
+
+    //TODO: new constructor
+    public MyRecyclerAdapter(FragmentActivity fragmentActivity) {
+        this.fragmentActivity = fragmentActivity;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -33,7 +32,7 @@ public class MyRecyclerAdapter extends Adapter {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (holder instanceof MyViewHolder) {
-            ((MyViewHolder)holder).mapValues(dataSet.get(position), position);
+            ((MyViewHolder) holder).mapValues(dataSet.get(position), position);
         }
     }
 
@@ -47,28 +46,25 @@ public class MyRecyclerAdapter extends Adapter {
         notifyDataSetChanged();
     }
 
-<<<<<<< HEAD
     public void setDataSet(ArrayList<Record> dataSet) {
-=======
-    public void setDataSet(List<Record> dataSet) {
->>>>>>> c9b13b891813395f29ced4a5def9228624f35247
         this.dataSet = dataSet;
     }
 
     class MyViewHolder extends ViewHolder {
 
         public EditText address;
+
         public EditText time;
         public int position;
 
-        private boolean dontChangeThisShit;
+        private boolean dontChangeThis;
 
         public MyViewHolder(View itemView) {
             super(itemView);
 
-            dontChangeThisShit = true;
-            address = (EditText)itemView.findViewById(R.id.address);
-            time = (EditText)itemView.findViewById(R.id.textClock);
+            dontChangeThis = true;
+            address = (EditText) itemView.findViewById(R.id.address);
+            time = (EditText) itemView.findViewById(R.id.textClock);
 
             address.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -83,43 +79,53 @@ public class MyRecyclerAdapter extends Adapter {
 
                 @Override
                 public void afterTextChanged(Editable s) {
-                    if(dontChangeThisShit)
+                    if (dontChangeThis)
                         return;
-                    if(position <= dataSet.size()) {
+                    if (position <= dataSet.size()) {
                         dataSet.get(position).address = s.toString();
                     }
                 }
             });
-            time.addTextChangedListener(new TextWatcher() {
+
+            time.setOnTouchListener(new View.OnTouchListener() {
                 @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                public boolean onTouch(View v, MotionEvent event) {
+                    if (event.getAction() != MotionEvent.ACTION_DOWN)
+                        return false;
+                    MyTimePickerFragment dialog = new MyTimePickerFragment();
+                    dialog.setCallback(new MyTimePickerFragment.Callback() {
+                                           @Override
+                                           public void onTimeSet(int hour, int minute) {
+                                               String timeString;
+                                               if (hour < 10 && minute<10 )
+                                                   timeString = "0" + hour + ":0" + minute;
+                                               else if (hour < 10)
+                                                   timeString = "0" + hour + ":" + minute;
+                                               else if (minute <10)
+                                                   timeString = hour + ":0" + minute;
+                                               else
+                                                   timeString = hour + ":" + minute;
 
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-                    if(dontChangeThisShit)
-                        return;
-                    if(position <= dataSet.size()) {
-                        dataSet.get(position).time = s.toString();
-                    }
+                                               dataSet.get(position).time = timeString;
+                                               time.setText(timeString);
+                                           }
+                                       }
+                    );
+                    dialog.show(fragmentActivity.getFragmentManager(), "timePicker");
+                    return true;
                 }
             });
+
         }
 
-        public void mapValues(Record record, int position){
-            dontChangeThisShit = true;
+        public void mapValues(Record record, int position) {
+            dontChangeThis = true;
 
             address.setText(record.address);
             time.setText(record.time);
             this.position = position;
 
-            dontChangeThisShit = false;
+            dontChangeThis = false;
         }
     }
 }
