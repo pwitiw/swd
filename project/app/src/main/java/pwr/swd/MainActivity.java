@@ -16,7 +16,7 @@ import pwr.swd.services.RestService;
 public class MainActivity extends AppCompatActivity {
 
     private MyRecyclerAdapter adapter;
-    private List<Record> dataSet = new ArrayList<>();
+    private ArrayList<Record> dataSet = new ArrayList<>();
 
 
     private RouteService routeService;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUpRecyclerView() {
 
-        adapter = new MyRecyclerAdapter();
+        adapter = new MyRecyclerAdapter(this);
         adapter.setDataSet(this.dataSet);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
