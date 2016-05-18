@@ -25,15 +25,16 @@ public class RestService {
         http = HttpHelper.getInstance();
     }
 
-    public void getDataForLocalizations(final MapQuestRequest mapQuestRequest) {
+    public void getDataForLocalizations(final MapQuestRequest mapQuestRequest, final Long[] times) {
 
         http = HttpHelper.getInstance();
         MapQuestRequest request = mapQuestRequest;
         http.mapQuestAPI.post(request, new Callback<MapQuestResponse>() {
             @Override
             public void success(MapQuestResponse mapQuestResponse, Response response) {
-                nodes = createVertexes(mapQuestResponse);
+                nodes = createVertexes(mapQuestResponse, times);
                 createDistanceMatrix(mapQuestResponse, nodes);
+
             }
 
             @Override
@@ -46,13 +47,13 @@ public class RestService {
         return nodes;
     }
 
-    private List<Vertex> createVertexes(MapQuestResponse response) {
+    private List<Vertex> createVertexes(MapQuestResponse response, Long[] times) {
         List<Vertex> list = new ArrayList<Vertex>();
         MapQuestLocation[] locations = response.getLocations();
 
-        for (MapQuestLocation loc : locations) {
-            //todo przekazac ograniczenie czasowe jako Long (liczba sekund od teraz do limitu czaspwego) zamiast tego "0"
-            list.add(new Vertex(new GraphNode(loc.toString(), 0L)));
+        for (int i = 0; i < locations.length; i++) {
+
+            list.add(new Vertex(new GraphNode(locations[i].toString(), times[i])));
         }
         return list;
     }

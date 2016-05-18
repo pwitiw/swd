@@ -12,6 +12,7 @@ import java.util.List;
 
 import pwr.swd.mapQuestModel.MapQuestRequest;
 import pwr.swd.services.RestService;
+import pwr.swd.utils.TimeParser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 MapQuestRequest request = MapQuestRequest.parseMapQuestRequest(dataSet);
-                restService.getDataForLocalizations(request);
+                Long[] times = TimeParser.parseTimes(dataSet);
+                restService.getDataForLocalizations(request,times);
             }
         });
-
     }
 
     private void setUpRecyclerView() {
