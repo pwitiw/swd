@@ -1,4 +1,4 @@
-package pwr.swd;
+package pwr.swd.utils;
 
 public class Record {
     public String address;

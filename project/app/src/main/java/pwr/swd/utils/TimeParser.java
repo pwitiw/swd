@@ -1,11 +1,7 @@
 package pwr.swd.utils;
 
-import org.joda.time.Hours;
-import org.joda.time.LocalTime;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import pwr.swd.Record;
 
 /**
  * Created by Patryk on 18.05.2016.

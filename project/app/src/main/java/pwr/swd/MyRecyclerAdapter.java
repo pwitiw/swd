@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import pwr.swd.utils.Record;
+
 import static android.support.v7.widget.RecyclerView.Adapter;
 import static android.support.v7.widget.RecyclerView.ViewHolder;
 

@@ -8,18 +8,16 @@ import android.view.View;
 import android.widget.Button;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import pwr.swd.mapQuestModel.MapQuestRequest;
-import pwr.swd.services.RestService;
-import pwr.swd.utils.TimeParser;
+import pwr.swd.services.ActionService;
+import pwr.swd.utils.IncorrectInputException;
+import pwr.swd.utils.Record;
 
 public class MainActivity extends AppCompatActivity {
 
     private MyRecyclerAdapter adapter;
     private ArrayList<Record> dataSet = new ArrayList<>();
-
-    private RestService restService;
+    private ActionService actionService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setUpButtons();
         setUpRecyclerView();
-
-        restService = new RestService();
-
+        setUpServices();
     }
 
     private void setUpButtons() {
@@ -41,15 +37,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button bt2 = (Button) findViewById(R.id.find_fastest);
-        bt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MapQuestRequest request = MapQuestRequest.parseMapQuestRequest(dataSet);
-                Long[] times = TimeParser.parseTimes(dataSet);
-                restService.getDataForLocalizations(request,times);
-            }
-        });
+        Button bt2 = (Button) findViewById(R.id.find_shortestshortest);
+        bt2.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        performFindFastest();
+                    }
+                }
+        );
     }
 
     private void setUpRecyclerView() {
@@ -60,6 +56,18 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+    }
 
+    private void setUpServices() {
+        actionService = new ActionService();
+    }
+
+    private void performFindFastest() {
+        String result;
+        try {
+            result = actionService.computeShortestRoute(dataSet);
+        } catch (IncorrectInputException e) {
+            e.printStackTrace(); //todo tutaj jakas informacja sie niech wyswietla
+        }
     }
 }

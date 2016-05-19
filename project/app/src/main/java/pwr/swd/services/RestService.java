@@ -19,53 +19,35 @@ import retrofit.client.Response;
 public class RestService {
 
     private HttpHelper http;
-    private List<Vertex> nodes;
+    private RouteService routeService;
+    private String result;
 
     public RestService() {
         http = HttpHelper.getInstance();
     }
 
-    public void getDataForLocalizations(final MapQuestRequest mapQuestRequest, final Long[] times) {
+    public String getDataForLocalizations(final MapQuestRequest mapQuestRequest, final Long[] times) {
 
         http = HttpHelper.getInstance();
-        MapQuestRequest request = mapQuestRequest;
+        routeService = new RouteService();
+        final MapQuestRequest request = mapQuestRequest;
         http.mapQuestAPI.post(request, new Callback<MapQuestResponse>() {
             @Override
-            public void success(MapQuestResponse mapQuestResponse, Response response) {
-                nodes = createVertexes(mapQuestResponse, times);
-                createDistanceMatrix(mapQuestResponse, nodes);
+            public void success(MapQuestResponse mapQuestResponse, Response r) {
 
+               result = routeService.performAlgorithmForOptimalPath(mapQuestResponse, times);
             }
 
             @Override
             public void failure(RetrofitError error) {
+                result = "";
             }
         });
+
+        return result;
     }
 
-    public List<Vertex> getLocationsGraph() {
-        return nodes;
-    }
 
-    private List<Vertex> createVertexes(MapQuestResponse response, Long[] times) {
-        List<Vertex> list = new ArrayList<Vertex>();
-        MapQuestLocation[] locations = response.getLocations();
 
-        for (int i = 0; i < locations.length; i++) {
-
-            list.add(new Vertex(new GraphNode(locations[i].toString(), times[i])));
-        }
-        return list;
-    }
-
-    private void createDistanceMatrix(MapQuestResponse response, List<Vertex> list) {
-        for (int i = 0; i < list.size(); i++) {
-            Long[] currTimes = response.getTime()[i];
-
-            for (int j = 0; j < currTimes.length; j++) {
-                list.get(i).addDestination(list.get(j), currTimes[j]);
-            }
-        }
-    }
 
 }

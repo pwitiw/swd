@@ -3,8 +3,7 @@ package pwr.swd.mapQuestModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import pwr.swd.Record;
-import pwr.swd.utils.Consts;
+import pwr.swd.utils.Record;
 
 /**
  * Created by Patryk on 04.05.2016.
