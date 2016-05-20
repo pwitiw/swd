@@ -36,6 +36,7 @@ public class RestService {
             public void success(MapQuestResponse mapQuestResponse, Response r) {
 
                result = routeService.performAlgorithmForOptimalPath(mapQuestResponse, times);
+                //todo tutaj nowe activity odpalane z resultem
             }
 
             @Override

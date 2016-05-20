@@ -63,9 +63,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performFindFastest() {
-        String result;
         try {
-            result = actionService.computeShortestRoute(dataSet);
+          actionService.computeShortestRoute(dataSet);
         } catch (IncorrectInputException e) {
             e.printStackTrace(); //todo tutaj jakas informacja sie niech wyswietla
         }
