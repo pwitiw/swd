@@ -1,4 +1,4 @@
-package pwr.swd.mapQuestModel;
+package pwr.swd.MapQuestModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -6,8 +6,8 @@ import java.util.List;
 import pwr.swd.algorithm.DPAlgorithm;
 import pwr.swd.algorithm.graph.GraphNode;
 import pwr.swd.algorithm.graph.Vertex;
-import pwr.swd.mapQuestModel.MapQuestLocation;
-import pwr.swd.mapQuestModel.MapQuestResponse;
+import pwr.swd.MapQuestModel.MapQuestLocation;
+import pwr.swd.MapQuestModel.MapQuestResponse;
 
 /**
  * Created by Patryk on 19.05.2016.

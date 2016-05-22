@@ -1,7 +1,7 @@
 package pwr.swd.utils;
 
-import pwr.swd.mapQuestModel.MapQuestRequest;
-import pwr.swd.mapQuestModel.MapQuestResponse;
+import pwr.swd.MapQuestModel.MapQuestRequest;
+import pwr.swd.MapQuestModel.MapQuestResponse;
 import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.POST;

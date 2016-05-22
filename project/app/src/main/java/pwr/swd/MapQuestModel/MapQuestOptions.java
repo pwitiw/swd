@@ -1,4 +1,4 @@
-package pwr.swd.mapQuestModel;
+package pwr.swd.MapQuestModel;
 
 /**
  * Created by Patryk on 04.05.2016.

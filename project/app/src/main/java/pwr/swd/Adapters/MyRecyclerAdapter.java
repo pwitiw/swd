@@ -1,4 +1,4 @@
-package pwr.swd;
+package pwr.swd.Adapters;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +10,8 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import pwr.swd.Dialogs.MyTimePickerFragment;
+import pwr.swd.R;
 import pwr.swd.utils.Record;
 
 import static android.support.v7.widget.RecyclerView.Adapter;
@@ -92,7 +94,7 @@ public class MyRecyclerAdapter extends Adapter {
             time.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getAction() != MotionEvent.ACTION_DOWN)
+                    if (event.getAction() != MotionEvent.ACTION_UP)
                         return false;
                     MyTimePickerFragment dialog = new MyTimePickerFragment();
                     dialog.setCallback(new MyTimePickerFragment.Callback() {

@@ -16,4 +16,7 @@ public class Consts {
         add("Tramwajowa 8, Wroclaw, PL");
     }};
 
+    public static final String BUNDLE_TAG = "bundle";
+    public static final String DTO_TAG = "dto"; // data transfer object
+
 }

@@ -1,4 +1,4 @@
-package pwr.swd;
+package pwr.swd.Dialogs;
 
 import android.app.Dialog;
 import android.app.DialogFragment;

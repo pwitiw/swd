@@ -6,5 +6,8 @@
     <string name="dodaj">Dodaj</string>
     <string name="wyszukaj_najkr_tsza_tras">Wyszukaj najkrótsza trasę</string>
     <string name="wyszukaj_najszybsza_tras">wyszukaj najszybsza trasę</string>
-
+    <string name="placeholder_text">placeholder text</string>
+    <string name="licze">Liczę</string>
+    <string name="ewidentny_blad">Ewidentny Błąd</string>
+    <string name="zle_dane">Złe dane</string>
 </resources>

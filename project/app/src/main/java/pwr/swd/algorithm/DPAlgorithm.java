@@ -29,7 +29,7 @@ public class DPAlgorithm {
             for (Vertex v : result.getVisitedLocations()) {
                 path += String.format("\n> %s", v);
             }
-            path += String.format("Dlugosc sciezki: %s", result.getTotalDistance());
+            path += String.format("\nDlugosc sciezki: %s", result.getTotalDistance());
         } else {
             path = "Nie znaleziono sciezki, ktora miesci sie w limicie czasowym";
         }

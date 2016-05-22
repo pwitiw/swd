@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".Activities.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
@@ -42,14 +41,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/wyszukaj_najkr_tsza_tras" />
-
-            <Button
-                android:id="@+id/find_fastest"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/wyszukaj_najszybsza_tras" />
-
 
         </LinearLayout>
 

@@ -1,4 +1,4 @@
-package pwr.swd.mapQuestModel;
+package pwr.swd.MapQuestModel;
 
 import java.util.ArrayList;
 import java.util.List;
